@@ -131,9 +131,6 @@ class CriaturaTest {
     @Test
     void testAtacar() {
         criatura.atacar(mockAlvo);
-        // O método atacar apenas imprime no console, então não há um estado interno para verificar diretamente.
-        // Poderíamos usar um System.out.println captor, mas para este teste simples, a chamada é suficiente.
-        // Para um teste mais robusto, mockar System.out.println seria necessário.
     }
 
     @Test
