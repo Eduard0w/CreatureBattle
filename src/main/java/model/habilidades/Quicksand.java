@@ -1,7 +1,7 @@
 package model.habilidades;
 
 import model.Criatura;
-import model.EfeitoStatus;
+import model.efeitos.EfeitoStatus;
 import model.Habilidade;
 import model.TipoElemental;
 
@@ -12,8 +12,7 @@ public class Quicksand implements Habilidade{
 	
 	@Override
 	public String nomeHabilidade() {
-		// TODO Auto-generated method stub
-		return "quickSand";
+		return "Quicksand"; // Corrigido o nome da habilidade
 	}
 
 	@Override 
@@ -24,7 +23,7 @@ public class Quicksand implements Habilidade{
 		+ "\n Dano sofrido: "+ danoHabilidade);
 		alvo.receberDano(danoHabilidade);
 		
-		EfeitoStatus quickSand = new EfeitoStatus("Paralizar", duracaoPturno, danoCausado);
+		EfeitoStatus quickSand = new EfeitoStatus("Quicksand", duracaoPturno, danoCausado); // Corrigido o nome do efeito
 		alvo.adicionarEfeitoStatus(quickSand);
 		System.out.println(alvo.getNome() + " está preso na areia movediça " + duracaoPturno + " turnos!");
 		

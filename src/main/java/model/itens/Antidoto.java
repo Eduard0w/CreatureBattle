@@ -1,11 +1,12 @@
 package model.itens;
 
-import model.Item;
+import model.itens.Item;
 
 public class Antidoto extends Item{
 
-	public Antidoto(String nome, String efeito, int valor) {
-		super("Antídoto", "Limpar", valor);
+	public Antidoto() {
+		super("Antídoto", "limpar", 0);
 	}
 
 }
+

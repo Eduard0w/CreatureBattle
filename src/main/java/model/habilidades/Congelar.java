@@ -1,7 +1,7 @@
 package model.habilidades;
 
 import model.Criatura;
-import model.EfeitoStatus;
+import model.efeitos.EfeitoStatus;
 import model.Habilidade;
 import model.TipoElemental;
 

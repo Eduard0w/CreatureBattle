@@ -1,5 +1,6 @@
 package principal;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import model.Jogador;
@@ -9,6 +10,8 @@ import model.personagens.MiniDragao;
 import model.personagens.Slime;
 import model.personagens.Syrene;
 import service.Aventura;
+import service.BatalhaService;
+import service.Loja;
 
 public class Main {
 
@@ -40,29 +43,17 @@ public class Main {
 				break;
 		}
 		
-		Aventura comecar = new Aventura(p1);
+		// Instanciando as dependências para Aventura
+		Random random = new Random();
+		Loja loja = new Loja(sc);
+		// BatalhaService precisa de dois jogadores no construtor, mas para a inicialização do Main, podemos usar um placeholder
+		// O Aventura irá chamar setJogadores no BatalhaService com os jogadores corretos.
+		BatalhaService batalhaService = new BatalhaService(p1, new Jogador("InimigoPlaceholder", new Slime(TipoElemental.AR), 0), sc, random);
+
+		Aventura comecar = new Aventura(p1, batalhaService, sc, random, loja);
 		comecar.iniciar();
 		
 		sc.close();
-		
-		
 	}
-
-	//O que falta (que eu lembro agora):
-	/* Definir habilidade para os personagens que podem ser escohidos pelo usuario.
-	 * Deixar o usuario escolher qual criatura vai utilizar.
-	 * Definir que criaturas só podem ter habilidades que condizem com seu elemento.
-	 * Fazer a batalha ser mais equilibrada, fazendo inimigos que ataquem habilidades e causem dano.
-	 * Fazer os efeitos funcionarem.
-	 * Fazer quando houver mais de um item igual no iventario ele ser incrementado um no outro (EX.: 1- poção de cura(3)).
-	 * Fazer os outros itens funcionarem.
-	 * Fazer uma contagem de inimigo, quando 5 forem mortos aparece o boss final
-	 * Definir um nivel maximo de turnos que o usuario ira lutar para batalhar contra o boss final.
-	 * Dar a possibilidade do usuario comprar mais de um item na loja, dando a opção dele sair da loja. (mas tem que comprar no minimo um item, amenos que não tenha dinheiro suficiente)
-	 * 
-	 * ----------
-	 * 
-	 * 
-	 * Fazer testes com Junit e mockito
-	 */
 }
+

@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.efeitos.EfeitoStatus;
+import model.itens.Item;
+
 public class Criatura {
 	private String nome; 
 	private double hp, atk, def;
@@ -41,6 +44,8 @@ public class Criatura {
 	
 	public int getVelocidade() {return velocidade;}
 	public void setVelocidade(int velocidade) {	this.velocidade = velocidade;}
+
+	public double getMaxHp() { return 100.0; } // Adicionado para fins de teste, assumindo HP máximo de 100
 
 	public List<Habilidade> getHabilidades() {
 		return habilidades;

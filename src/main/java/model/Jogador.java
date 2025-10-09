@@ -1,5 +1,7 @@
 package model;
 
+import model.itens.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 

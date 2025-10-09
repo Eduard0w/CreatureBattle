@@ -1,12 +1,13 @@
 package model.itens;
 
-import model.Item;
+import model.itens.Item;
 
 public class PocaoCura extends Item{
 
-	public PocaoCura(String nome, String efeito, int valor) {
-		super(nome, efeito, valor);
+	public PocaoCura() {
+		super("Poção de Cura", "cura", 30);
 	}
 
 	
 }
+

@@ -2,11 +2,18 @@ package service;
 
 import java.util.Scanner;
 
-import model.Item;
+import model.itens.Item;
 import model.Jogador;
+import model.itens.Antidoto;
+import model.itens.PocaoCura;
+import model.itens.PocaoForca;
 
 public class Loja {
-	 private Scanner sc = new Scanner(System.in);
+	 private Scanner sc;
+
+	 public Loja(Scanner sc) {
+		 this.sc = sc;
+	 }
 
 	    public void abrirLoja(Jogador jogador) {
 	        System.out.println("\n🛒 Bem-vindo à Loja! Você tem " + jogador.getCoins() + " coins.");
@@ -21,19 +28,19 @@ public class Loja {
 	        switch (escolha) {
 	            case 1:
 	                if (jogador.getCoins() >= 20) {
-	                    item = new Item("Poção de Cura", "cura", 30);
+	                    item = new PocaoCura();
 	                    jogador.gastarCoins(20);
 	                }
 	                break;
 	            case 2:
 	                if (jogador.getCoins() >= 25) {
-	                    item = new Item("Poção de Força", "ataque", 10);
+	                    item = new PocaoForca();
 	                    jogador.gastarCoins(25);
 	                }
 	                break;
 	            case 3:
 	                if (jogador.getCoins() >= 30) {
-	                    item = new Item("Antídoto", "limpar", 0);
+	                    item = new Antidoto();
 	                    jogador.gastarCoins(30);
 	                }
 	                break;
@@ -42,7 +49,7 @@ public class Loja {
 	        }
 
 	        if (item != null) {
-	            jogador.getInventario().add(item);
+	            jogador.getCriatura().adicionarItem(item);
 	            System.out.println("✔ Você comprou: " + item.getNome());
 	        }
 	    }

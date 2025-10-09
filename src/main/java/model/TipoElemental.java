@@ -6,7 +6,8 @@ public enum TipoElemental {
 	
 	public double calcularVantagem(TipoElemental atacado) {
 		if (this == FOGO) {
-            if (atacado == TERRA || atacado == AR) return 1.5; 
+            if (atacado == TERRA) return 2.0; 
+            if (atacado == AR) return 1.5; 
             if (atacado == AGUA) return 0.5;
         } else if (this == AGUA) {
             if (atacado == FOGO || atacado == TERRA) return 1.5;
