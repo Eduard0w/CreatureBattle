@@ -31,7 +31,7 @@ public class BatalhaService {
         this.jogador1 = j1;
         this.jogador2 = j2;
         this.ordemTurno.clear(); // Limpa a ordem de turno anterior
-        this.ordemTurno = new ArrayList<>(); // Cria uma nova lista para a nova batalha
+        this.ordemTurno = new ArrayList<>();
     }
 
     public Scanner getScanner() {
@@ -54,7 +54,7 @@ public class BatalhaService {
 
             for (Criatura criaturaAtual : ordemTurno) {
                 if (!jogador1.aindaPodeLutar() || !jogador2.aindaPodeLutar()) {
-                    break; // Batalha terminou
+                    break;
                 }
 
                 Jogador jogadorDono = (criaturaAtual == jogador1.getCriatura()) ? jogador1 : jogador2;
@@ -65,7 +65,7 @@ public class BatalhaService {
                 gerenciarEfeitosDeStatus(criaturaAtual);
                 if (!criaturaAtual.estaVivo()) {
                     System.out.println(criaturaAtual.getNome() + " foi derrotado pelos efeitos de status!");
-                    continue; // Próxima criatura no turno
+                    continue;
                 }
 
                 boolean podeAgir = true;
@@ -78,9 +78,9 @@ public class BatalhaService {
                 }
 
                 if (podeAgir) {
-                    if (jogadorDono == jogador1) { // É o jogador humano
+                    if (jogadorDono == jogador1) {
                         executarAcaoJogador(jogadorDono, oponenteDono);
-                    } else { // É o inimigo (NPC)
+                    } else { 
                         executarAcaoInimigo(jogadorDono, oponenteDono);
                     }
                 }
@@ -165,7 +165,7 @@ public class BatalhaService {
                 break;
             case 4:
                 System.out.println(jogador.getNome() + " fugiu da batalha!");
-                atacante.setHp(0); // Força a derrota do jogador que fugiu
+                atacante.setHp(0);
                 break;
             default:
                 System.out.println("Ação inválida! Atacando...");
