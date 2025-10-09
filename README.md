@@ -1,6 +1,5 @@
 <img width="500" height="500" alt="Mystic_Arena_img_Logo-removebg-preview" src="https://github.com/user-attachments/assets/a1e7e072-5ada-49a7-95bc-eea2893dd100" />
 
-
 # 🎮 Mystic Arena: Batalha dos Elementos
 
 > 🪶 *"Domine seu elemento. Derrote todos os outros."*  
@@ -51,3 +50,5 @@ Cada escolha conta: ataque, habilidade ou item — tudo pode mudar o destino da 
 
 Trabalho feito por Yuri e Eduardo.
 Para projeto de Testes e Qualidade de Software do professor Pedro Arthur
+
+Slide: https://docs.google.com/presentation/d/1xg50dACd291NA_g2NCWBxFRdeIKrJ3SltojE06akUh0/edit?usp=sharing
