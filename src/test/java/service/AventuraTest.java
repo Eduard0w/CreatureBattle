@@ -48,7 +48,6 @@ class AventuraTest {
         when(mockJogador.getNome()).thenReturn("Herói");
     }
 
-    // Helper para definir o campo inimigosDerrotados via reflexão
     private void setInimigosDerrotados(int value) {
         try {
             java.lang.reflect.Field field = Aventura.class.getDeclaredField("inimigosDerrotados");
@@ -85,17 +84,16 @@ class AventuraTest {
 
     @Test
     void testLoopAventura_JogadorVenceUmaBatalha() {
-        when(mockJogador.aindaPodeLutar()).thenReturn(true, false); // Jogador luta uma vez e para
+        when(mockJogador.aindaPodeLutar()).thenReturn(true, false);
 
         Criatura mockInimigo = mock(Slime.class);
-        when(mockInimigo.estaVivo()).thenReturn(false); // Inimigo é derrotado
+        when(mockInimigo.estaVivo()).thenReturn(false);
 
         doReturn(mockInimigo).when(spyAventura).gerarProximoInimigo();
         doNothing().when(spyAventura).executarBatalha(any(Criatura.class));
         doReturn(false).when(spyAventura).jogadorPerdeu(any(Criatura.class));
         doReturn(false).when(spyAventura).jogadorVenceuBoss(any(Criatura.class));
         
-        // Usar doAnswer para simular o incremento de inimigosDerrotados
         doAnswer(invocation -> {
             setInimigosDerrotados(spyAventura.getInimigosDerrotados() + 1);
             return null;
@@ -113,14 +111,14 @@ class AventuraTest {
 
     @Test
     void testLoopAventura_JogadorPerdeUmaBatalha() {
-        when(mockJogador.aindaPodeLutar()).thenReturn(true, false); // Jogador luta uma vez e para
+        when(mockJogador.aindaPodeLutar()).thenReturn(true, false);
 
         Criatura mockInimigo = mock(Slime.class);
-        when(mockInimigo.estaVivo()).thenReturn(true); // Inimigo não é derrotado (jogador perde)
+        when(mockInimigo.estaVivo()).thenReturn(true);
 
         doReturn(mockInimigo).when(spyAventura).gerarProximoInimigo();
         doNothing().when(spyAventura).executarBatalha(any(Criatura.class));
-        doReturn(true).when(spyAventura).jogadorPerdeu(any(Criatura.class)); // Jogador perde
+        doReturn(true).when(spyAventura).jogadorPerdeu(any(Criatura.class)); 
         doReturn(false).when(spyAventura).jogadorVenceuBoss(any(Criatura.class));
         doNothing().when(spyAventura).processarVitoria();
 
@@ -136,20 +134,18 @@ class AventuraTest {
 
     @Test
     void testLoopAventura_JogadorVenceBoss() {
-        when(mockJogador.aindaPodeLutar()).thenReturn(true, true, true, true, true, false); // 5 batalhas, depois para
+        when(mockJogador.aindaPodeLutar()).thenReturn(true, true, true, true, true, false); 
 
         Criatura mockInimigoNormal = mock(Slime.class);
         when(mockInimigoNormal.estaVivo()).thenReturn(false);
         Criatura mockBoss = mock(Boss.class);
-        when(mockBoss.estaVivo()).thenReturn(false); // Boss é derrotado
+        when(mockBoss.estaVivo()).thenReturn(false); 
 
         doReturn(mockInimigoNormal, mockInimigoNormal, mockInimigoNormal, mockInimigoNormal, mockBoss)
                 .when(spyAventura).gerarProximoInimigo();
         doNothing().when(spyAventura).executarBatalha(any(Criatura.class));
         doReturn(false).when(spyAventura).jogadorPerdeu(any(Criatura.class));
-        doReturn(false, false, false, false, true).when(spyAventura).jogadorVenceuBoss(any(Criatura.class)); // Vence o boss na 5ª
-        
-        // Usar doAnswer para simular o incremento de inimigosDerrotados
+        doReturn(false, false, false, false, true).when(spyAventura).jogadorVenceuBoss(any(Criatura.class)); 
         doAnswer(invocation -> {
             setInimigosDerrotados(spyAventura.getInimigosDerrotados() + 1);
             return null;
@@ -161,26 +157,26 @@ class AventuraTest {
         verify(spyAventura, times(5)).executarBatalha(any(Criatura.class));
         verify(spyAventura, times(5)).jogadorPerdeu(any(Criatura.class));
         verify(spyAventura, times(5)).jogadorVenceuBoss(any(Criatura.class));
-        verify(spyAventura, times(4)).processarVitoria(); // 4 vitórias normais, boss não chama processarVitoria
-        assertEquals(4, spyAventura.getInimigosDerrotados()); // 4 inimigos normais derrotados
+        verify(spyAventura, times(4)).processarVitoria(); 
+        assertEquals(4, spyAventura.getInimigosDerrotados()); 
     }
 
     @Test
     void testLoopAventura_JogadorPerdeBoss() {
-        when(mockJogador.aindaPodeLutar()).thenReturn(true, true, true, true, true, false); // 5 batalhas, depois para
+        when(mockJogador.aindaPodeLutar()).thenReturn(true, true, true, true, true, false); 
 
         Criatura mockInimigoNormal = mock(Slime.class);
         when(mockInimigoNormal.estaVivo()).thenReturn(false);
         Criatura mockBoss = mock(Boss.class);
-        when(mockBoss.estaVivo()).thenReturn(true); // Boss não é derrotado (jogador perde)
+        when(mockBoss.estaVivo()).thenReturn(true); 
 
         doReturn(mockInimigoNormal, mockInimigoNormal, mockInimigoNormal, mockInimigoNormal, mockBoss)
                 .when(spyAventura).gerarProximoInimigo();
         doNothing().when(spyAventura).executarBatalha(any(Criatura.class));
-        doReturn(false, false, false, false, true).when(spyAventura).jogadorPerdeu(any(Criatura.class)); // Jogador perde na 5ª
+        doReturn(false, false, false, false, true).when(spyAventura).jogadorPerdeu(any(Criatura.class)); 
         doReturn(false).when(spyAventura).jogadorVenceuBoss(any(Criatura.class));
         
-        // Usar doAnswer para simular o incremento de inimigosDerrotados
+  
         doAnswer(invocation -> {
             setInimigosDerrotados(spyAventura.getInimigosDerrotados() + 1);
             return null;
@@ -191,9 +187,9 @@ class AventuraTest {
         verify(spyAventura, times(5)).gerarProximoInimigo();
         verify(spyAventura, times(5)).executarBatalha(any(Criatura.class));
         verify(spyAventura, times(5)).jogadorPerdeu(any(Criatura.class));
-        verify(spyAventura, times(4)).jogadorVenceuBoss(any(Criatura.class)); // Boss não é vencido, então não é verificado na 5ª
-        verify(spyAventura, times(4)).processarVitoria(); // 4 vitórias normais
-        assertEquals(4, spyAventura.getInimigosDerrotados()); // 4 inimigos normais derrotados
+        verify(spyAventura, times(4)).jogadorVenceuBoss(any(Criatura.class));
+        verify(spyAventura, times(4)).processarVitoria(); 
+        assertEquals(4, spyAventura.getInimigosDerrotados());
     }
 
     @Test
@@ -218,7 +214,7 @@ class AventuraTest {
 
         assertNotNull(inimigo);
         assertTrue(inimigo instanceof Boss);
-        verify(spyAventura, never()).gerarInimigo(); // Não deve chamar gerarInimigo() se for boss
+        verify(spyAventura, never()).gerarInimigo(); 
     }
 
     @Test
@@ -269,18 +265,18 @@ class AventuraTest {
 
     @Test
     void testGerarInimigo() {
-        when(mockRandom.nextInt(TipoElemental.values().length)).thenReturn(0); // Tipo elemental fixo
+        when(mockRandom.nextInt(TipoElemental.values().length)).thenReturn(0); 
 
-        when(mockRandom.nextInt(4)).thenReturn(0); // Slime
+        when(mockRandom.nextInt(4)).thenReturn(0); 
         assertTrue(spyAventura.gerarInimigo() instanceof Slime);
 
-        when(mockRandom.nextInt(4)).thenReturn(1); // Golem
+        when(mockRandom.nextInt(4)).thenReturn(1); 
         assertTrue(spyAventura.gerarInimigo() instanceof Golem);
 
-        when(mockRandom.nextInt(4)).thenReturn(2); // DragonFly
+        when(mockRandom.nextInt(4)).thenReturn(2);
         assertTrue(spyAventura.gerarInimigo() instanceof DragonFly);
 
-        when(mockRandom.nextInt(4)).thenReturn(3); // MiniDragao
+        when(mockRandom.nextInt(4)).thenReturn(3);
         assertTrue(spyAventura.gerarInimigo() instanceof MiniDragao);
     }
 }
