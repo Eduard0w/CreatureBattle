@@ -43,11 +43,9 @@ public class Main {
 				break;
 		}
 		
-		// Instanciando as dependências para Aventura
 		Random random = new Random();
 		Loja loja = new Loja(sc);
-		// BatalhaService precisa de dois jogadores no construtor, mas para a inicialização do Main, podemos usar um placeholder
-		// O Aventura irá chamar setJogadores no BatalhaService com os jogadores corretos.
+
 		BatalhaService batalhaService = new BatalhaService(p1, new Jogador("InimigoPlaceholder", new Slime(TipoElemental.AR), 0), sc, random);
 
 		Aventura comecar = new Aventura(p1, batalhaService, sc, random, loja);
