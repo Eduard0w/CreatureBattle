@@ -28,7 +28,7 @@ public class AventuraTest {
     @Mock
     private Criatura mockCriaturaJogador;
     
-    // Mock para a Loja, pois Aventura interage com ela
+   
     @Mock
     private Loja mockLoja;
 
@@ -43,7 +43,6 @@ public class AventuraTest {
     
     @Test
     public void jogador1DevePerder() {
-    	//Jogador matou 3 inimigos e perdeu. 
     	when(mockJogador.aindaPodeLutar()).thenReturn(true, true, true, true, true, true, false);
     	
     	aventura.iniciar();
